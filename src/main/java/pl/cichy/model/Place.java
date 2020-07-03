@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -35,12 +37,13 @@ public class Place {
     private double rate;
 
     @OneToMany
+    @JoinColumn(name = "place_id")
     private Set <Comment> comments;
 
     Place(){ }
 
     public int getId() { return id; }
-    public void setId(int project_id) { this.id = id; }
+    public void setId(int id) { this.id = id; }
 
     public String getPlaceName() { return placeName; }
     public void setPlaceName(String placeName) { this.placeName = placeName; }
@@ -70,6 +73,7 @@ public class Place {
         coordinate_X = source.coordinate_X;
         coordinate_Y = source.coordinate_Y;
         rate = source.rate;
+        comments = source.comments;
     }
 }
 

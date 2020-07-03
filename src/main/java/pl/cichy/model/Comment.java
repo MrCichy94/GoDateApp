@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table( name = "comments")
@@ -19,18 +20,11 @@ public class Comment {
     @NotBlank(message = "Nie pusty KOMENTARZ!")
     private String commentText;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_id")
-    private Place place;
-
     Comment(){ }
 
-    public Comment(String nickName, String commentText) {this(nickName, commentText, null);}
-
-    public Comment(String nickName, String commentText, Place place) {
+    public Comment(String nickName, String commentText) {
         this.nickName = nickName;
         this.commentText = commentText;
-        this.place = place;
     }
 
     public int getId() { return id; }
@@ -41,8 +35,5 @@ public class Comment {
 
     public String getCommentText() { return commentText; }
     public void setCommentText(String commentText) { this.commentText = commentText; }
-
-    public Place getPlace() { return place; }
-    public void setPlace(Place place) { this.place = place; }
 
 }

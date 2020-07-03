@@ -6,4 +6,4 @@ spring:
     url: 'jdbc:h2:file:C:/WorkSpring/GoDateApp/godate-db'
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
