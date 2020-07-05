@@ -37,7 +37,6 @@ public class Place {
     private double rate;
 
     @OneToMany
-    @JoinColumn(name = "place_id")
     private Set <Comment> comments;
 
     Place(){ }
@@ -64,7 +63,10 @@ public class Place {
     public void setRate(double rate) { this.rate = rate; }
 
     public Set<Comment> getComments() { return comments; }
-    public void setComments(Set<Comment> comments) { this.comments = comments; }
+    public void setComments(Set<Comment> comments) {
+        //comments.forEach(comment -> comment.setPlace(this));
+        this.comments = comments;
+    }
 
     public void updateFrom(final Place source){
         placeName = source.placeName;

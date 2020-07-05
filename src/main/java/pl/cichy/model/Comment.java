@@ -20,6 +20,9 @@ public class Comment {
     @NotBlank(message = "Nie pusty KOMENTARZ!")
     private String commentText;
 
+    //@ManyToOne
+    //private Place place;
+
     Comment(){ }
 
     public Comment(String nickName, String commentText) {
@@ -36,4 +39,7 @@ public class Comment {
     public String getCommentText() { return commentText; }
     public void setCommentText(String commentText) { this.commentText = commentText; }
 
+    //public Place getPlace() { return place; }
+
+    //public void setPlace(Place place) { this.place = place; }
 }
