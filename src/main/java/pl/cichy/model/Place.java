@@ -72,18 +72,5 @@ public class Place {
         coordinate_Y = source.coordinate_Y;
     }
 
-
-
-    public void updatePlaceRate(final Place source){
-        rate = averageRate(source);
-    }
-
-    public double averageRate(final Place source){
-        for (Comment comment : comments) {
-            rate += comment.getUserRate();
-        }
-        rate = rate/(comments.size());
-        return rate;
-    }
 }
 

@@ -48,4 +48,5 @@ public class Comment {
 
     public double getUserRate() { return userRate; }
     public void setUserRate(double userRate) { this.userRate = userRate; }
+
 }

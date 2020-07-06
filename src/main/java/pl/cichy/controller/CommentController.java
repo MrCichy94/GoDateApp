@@ -23,13 +23,6 @@ import java.util.Set;
 @RequestMapping(value = "/places")
 public class CommentController {
 
-    @RequestMapping
-    @ResponseBody
-    public int placeIdFromUrl(@PathVariable int id) {
-        int idFromUrl = id;
-        return idFromUrl;
-    }
-
     private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
     private final CommentRepository commentRepository;
     private final PlaceRepository placeRepository;
@@ -45,21 +38,26 @@ public class CommentController {
         Place place1 = placeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No place found with id="+id));
         toCreate.setPlace_id(id);
+
         Set <Comment> comments = new HashSet<>();
         comments = place1.getComments();
         comments.add(toCreate);
         commentRepository.save(toCreate);
-        //place1.getComments().add(toCreate);
+
         Set<Comment> finalComments = comments;
+
         placeRepository.findById(id)
                 .ifPresent(place -> {
                     place.setComments(finalComments);
                     placeRepository.save(place1);
                 });
+
         placeRepository.findById(id).ifPresent(place -> {
             place.setRate(placeRepository.getAveragePlaceRate(id));
             placeRepository.save(place);
         });
+
+        logger.info("Comment added");
         ResponseEntity.created(URI.create("/" + toCreate.getId())).body(toCreate);
     }
 

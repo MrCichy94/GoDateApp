@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/places")
@@ -21,9 +21,11 @@ class PlaceController {
 
     private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
     private final PlaceRepository placeRepository;
+    private final CommentRepository commentRepository;
 
-    public PlaceController(PlaceRepository placeRepository) {
+    public PlaceController(PlaceRepository placeRepository, CommentRepository commentRepository) {
         this.placeRepository = placeRepository;
+        this.commentRepository = commentRepository;
     }
 
     @PostMapping
@@ -65,11 +67,14 @@ class PlaceController {
     }
 
     //pomyślimy czy to tu będzie, i dla kogo
-    //uwazaj, usuwa miejsce ale nie komentarze!
     @DeleteMapping("/{id}")
     ResponseEntity<Place> deletePlace(@PathVariable int id) {
-        if (placeRepository.existsById(id)) {
+        if (!placeRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        else {
             placeRepository.deleteById(id);
+            logger.info("Place deleted");
         }
         return ResponseEntity.noContent().build();
     }

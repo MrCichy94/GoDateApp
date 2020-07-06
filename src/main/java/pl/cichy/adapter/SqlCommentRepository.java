@@ -14,4 +14,8 @@ public interface SqlCommentRepository extends CommentRepository, JpaRepository<C
     @Override
     @Query("select distinct g from Place g join fetch g.comments")
     List<Comment> findAll();
+
+    @Override
+    @Query(nativeQuery = true, value ="SELECT u.PLACE_ID FROM COMMENT u WHERE place_id=:id")
+    List<Comment> findCommentsByPlaceId();
 }

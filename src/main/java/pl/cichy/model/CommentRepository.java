@@ -15,6 +15,10 @@ public interface CommentRepository {
 
     Page<Comment> findAll(Pageable page);
 
+    void deleteById(Integer id);
+
+    List<Comment> findCommentsByPlaceId();
+
     Comment save (Comment entity);
 
     boolean existsById(Integer id);
