@@ -44,6 +44,7 @@ public class CommentController {
     public void createComment(@PathVariable("id") Integer id, @RequestBody Comment toCreate){
         Place place1 = placeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No place found with id="+id));
+        toCreate.setPlace_id(id);
         Set <Comment> comments = new HashSet<>();
         comments = place1.getComments();
         comments.add(toCreate);
@@ -55,6 +56,10 @@ public class CommentController {
                     place.setComments(finalComments);
                     placeRepository.save(place1);
                 });
+        placeRepository.findById(id).ifPresent(place -> {
+            place.setRate(placeRepository.getAveragePlaceRate(id));
+            placeRepository.save(place);
+        });
         ResponseEntity.created(URI.create("/" + toCreate.getId())).body(toCreate);
     }
 

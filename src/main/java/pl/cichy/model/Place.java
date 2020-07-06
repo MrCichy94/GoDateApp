@@ -5,8 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -32,8 +30,6 @@ public class Place {
     @NotNull(message = "Nie pusty cord y")
     private int coordinate_Y;
 
-
-    @NotNull(message = "Nie zero RATE!")
     private double rate;
 
     @OneToMany
@@ -74,8 +70,20 @@ public class Place {
         adress = source.adress;
         coordinate_X = source.coordinate_X;
         coordinate_Y = source.coordinate_Y;
-        rate = source.rate;
-        comments = source.comments;
+    }
+
+
+
+    public void updatePlaceRate(final Place source){
+        rate = averageRate(source);
+    }
+
+    public double averageRate(final Place source){
+        for (Comment comment : comments) {
+            rate += comment.getUserRate();
+        }
+        rate = rate/(comments.size());
+        return rate;
     }
 }
 

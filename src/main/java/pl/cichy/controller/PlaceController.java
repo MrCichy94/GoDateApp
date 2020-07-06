@@ -65,6 +65,7 @@ class PlaceController {
     }
 
     //pomyślimy czy to tu będzie, i dla kogo
+    //uwazaj, usuwa miejsce ale nie komentarze!
     @DeleteMapping("/{id}")
     ResponseEntity<Place> deletePlace(@PathVariable int id) {
         if (placeRepository.existsById(id)) {
