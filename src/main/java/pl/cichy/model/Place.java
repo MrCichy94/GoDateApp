@@ -1,10 +1,12 @@
 package pl.cichy.model;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,14 +27,12 @@ public class Place {
     @NotBlank(message = "Nie pusty adres!")
     private String adress;
 
-    @NotNull(message = "Nie pusty cord x")
-    private int coordinate_X;
-    @NotNull(message = "Nie pusty cord y")
-    private int coordinate_Y;
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private Coordinates coordinates;
 
     private double rate;
 
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set <Comment> comments;
 
     public Place(){ }
@@ -49,11 +49,8 @@ public class Place {
     public String getAdress() { return adress; }
     public void setAdress(String adress) { this.adress = adress; }
 
-    public int getCoordinate_X() { return coordinate_X; }
-    public void setCoordinate_X(int coordinate_X) { this.coordinate_X = coordinate_X; }
-
-    public int getCoordinate_Y() { return coordinate_Y; }
-    public void setCoordinate_Y(int coordinate_Y) { this.coordinate_Y = coordinate_Y; }
+    public Coordinates getCoordinates() { return coordinates; }
+    public void setCoordinates(Coordinates coordinates) { this.coordinates = coordinates; }
 
     public double getRate() { return rate; }
     public void setRate(double rate) { this.rate = rate; }
@@ -68,8 +65,7 @@ public class Place {
         placeName = source.placeName;
         description = source.description;
         adress = source.adress;
-        coordinate_X = source.coordinate_X;
-        coordinate_Y = source.coordinate_Y;
+        coordinates = source.coordinates;
     }
 
 }

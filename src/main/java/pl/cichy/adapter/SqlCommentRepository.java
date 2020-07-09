@@ -18,8 +18,4 @@ public interface SqlCommentRepository extends CommentRepository, JpaRepository<C
     @Query("select distinct g from Place g join fetch g.comments")
     List<Comment> findAll();
 
-    @Override
-    @Query(nativeQuery = true, value ="SELECT count(*) > 0 FROM COMMENTS WHERE PLACE_ID =:id")
-    boolean existsByPlaceId(@Param("id") Integer id);
-
 }

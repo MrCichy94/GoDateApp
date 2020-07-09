@@ -1,15 +1,12 @@
 package pl.cichy.logic;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.RequestScope;
 import pl.cichy.model.Comment;
 import pl.cichy.model.CommentRepository;
 import pl.cichy.model.Place;
 import pl.cichy.model.PlaceRepository;
-import pl.cichy.model.projection.PlaceCommentWriteModel;
 import pl.cichy.model.projection.PlaceReadModel;
 import pl.cichy.model.projection.PlaceWriteModel;
 
@@ -58,32 +55,7 @@ public class PlaceService {
 
         placeRepository.deleteById(id);
 
-        int num = 1;
-
-        //while (commentRepository.existsByPlaceId(id)) {
-        while (true) {
-            if (commentRepository.existsById(num)) {
-
-                int finalNum = num;
-                Comment commentToDele = commentRepository.findById(num)
-                        .orElseThrow(() -> new ResourceNotFoundException("No place found with id="+ finalNum));
-                commentRepository.deleteById(num);
-                num++;
-            }
-            else {
-                //commentRepository.deleteById(num);
-                num++;
-            }
-        }
-        //placeRepository.deleteById(id);
     }
-
-
-
-
-
-
-
 
     public PlaceReadModel createPlace(final PlaceWriteModel source){
         Place result = placeRepository.save(source.toPlace());

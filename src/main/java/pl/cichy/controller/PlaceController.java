@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.cichy.logic.PlaceService;
-import pl.cichy.model.Comment;
-import pl.cichy.model.CommentRepository;
-import pl.cichy.model.Place;
-import pl.cichy.model.PlaceRepository;
+import pl.cichy.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -27,14 +24,26 @@ class PlaceController {
     private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
     private final PlaceRepository placeRepository;
     private final CommentRepository commentRepository;
+    private final CoordinatesRepository coordinatesRepository;
 
-    public PlaceController(PlaceRepository placeRepository, CommentRepository commentRepository) {
+    public PlaceController(PlaceRepository placeRepository,
+                           CommentRepository commentRepository,
+                           CoordinatesRepository coordinatesRepository) {
         this.placeRepository = placeRepository;
         this.commentRepository = commentRepository;
+        this.coordinatesRepository = coordinatesRepository;
     }
 
     @PostMapping
     ResponseEntity<Place> createPlace(@RequestBody @Valid Place toCreate){
+
+        toCreate.
+
+        Coordinates newCords = new Coordinates();
+        newCords.setCoordinate_X();
+        newCords.setCoordinate_Y();
+        coordinatesRepository.save(newCords);
+
         Place result = placeRepository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }

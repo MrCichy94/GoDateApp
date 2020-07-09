@@ -17,5 +17,4 @@ public interface SqlPlaceRepository extends PlaceRepository, JpaRepository<Place
     @Override
     @Query(nativeQuery = true, value ="SELECT AVG(u.USER_RATE) from COMMENTS u where place_id=:id")
     double getAveragePlaceRate(@Param("id") Integer id);
-
 }

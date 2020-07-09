@@ -16,8 +16,6 @@ public class Comment {
     @GenericGenerator(name = "inc", strategy = "increment")
     private int id;
 
-    private int place_id;
-
     @NotBlank(message = "Nie pusty NICK!")
     private String nickName;
     @NotBlank(message = "Nie pusty KOMENTARZ!")
@@ -25,6 +23,8 @@ public class Comment {
 
     @NotNull(message = "Nie zero RATE!")
     private double userRate;
+
+    private int place_id;
 
     public Comment(){ }
 
@@ -37,9 +37,6 @@ public class Comment {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public int getPlace_id() { return place_id; }
-    public void setPlace_id(int place_id) { this.place_id = place_id; }
-
     public String getNickName() { return nickName; }
     public void setNickName(String nickName) { this.nickName = nickName; }
 
@@ -49,4 +46,6 @@ public class Comment {
     public double getUserRate() { return userRate; }
     public void setUserRate(double userRate) { this.userRate = userRate; }
 
+    public int getPlace_id() { return place_id; }
+    public void setPlace_id(int place_id) { this.place_id = place_id; }
 }

@@ -13,8 +13,6 @@ public interface CommentRepository {
 
     List<Comment> findAll();
 
-    boolean existsByPlaceId(Integer id);
-
     Optional<Comment> findById(Integer id);
 
     Page<Comment> findAll(Pageable page);
