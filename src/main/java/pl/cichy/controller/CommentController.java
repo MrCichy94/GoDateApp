@@ -43,6 +43,14 @@ public class CommentController {
         return ResponseEntity.created(URI.create("/" + toAdd.getId())).body(toAdd);
     }
 
+    /* JSON-POSTMAN-TEST = POST COMMENT
+    {
+        "nickName": "A Przemek Foch",
+        "commentText": "Do dupy!",
+        "userRate": 3
+    }
+     */
+
     //GET powinien wyrzucić wszystkie komentarze danego id place'a z jego seta
     @GetMapping("/{id}/comments")
     ResponseEntity<List<Comment>> readAllComments(Pageable page, @PathVariable String id) {

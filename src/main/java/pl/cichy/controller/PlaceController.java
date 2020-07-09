@@ -24,14 +24,11 @@ class PlaceController {
     private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
     private final PlaceRepository placeRepository;
     private final CommentRepository commentRepository;
-    private final CoordinatesRepository coordinatesRepository;
 
     public PlaceController(PlaceRepository placeRepository,
-                           CommentRepository commentRepository,
-                           CoordinatesRepository coordinatesRepository) {
+                           CommentRepository commentRepository) {
         this.placeRepository = placeRepository;
         this.commentRepository = commentRepository;
-        this.coordinatesRepository = coordinatesRepository;
     }
 
     @PostMapping
@@ -39,6 +36,15 @@ class PlaceController {
         Place result = placeRepository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
+
+    /* JSON-POSTMAN-TEST = POST PLACE
+    {
+	    "placeName": "Aronia",
+        "description": "Bardzo fajne miejsce na kawę!",
+        "adress": "Szewska 2",
+        "coordinates": {"coordinate_X": 444, "coordinate_Y": 444}
+    }
+     */
 
     @GetMapping(params = {"!sort", "!page", "!size"})
     ResponseEntity<List<Place>> readAllPlaces(){
