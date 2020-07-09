@@ -2,11 +2,14 @@ package pl.cichy.adapter;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pl.cichy.model.Comment;
 import pl.cichy.model.CommentRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface SqlCommentRepository extends CommentRepository, JpaRepository<Comment, Integer> {
@@ -16,6 +19,7 @@ public interface SqlCommentRepository extends CommentRepository, JpaRepository<C
     List<Comment> findAll();
 
     @Override
-    @Query(nativeQuery = true, value ="SELECT u.PLACE_ID FROM COMMENT u WHERE place_id=:id")
-    List<Comment> findCommentsByPlaceId();
+    @Query(nativeQuery = true, value ="SELECT count(*) > 0 FROM COMMENTS WHERE PLACE_ID =:id")
+    boolean existsByPlaceId(@Param("id") Integer id);
+
 }

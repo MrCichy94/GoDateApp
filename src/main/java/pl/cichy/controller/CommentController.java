@@ -3,10 +3,12 @@ package pl.cichy.controller;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.cichy.logic.PlaceService;
 import pl.cichy.model.Comment;
 import pl.cichy.model.CommentRepository;
 import pl.cichy.model.Place;
@@ -23,7 +25,10 @@ import java.util.Set;
 @RequestMapping(value = "/places")
 public class CommentController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
+    @Autowired
+    private PlaceService placeService;
+
+    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
     private final CommentRepository commentRepository;
     private final PlaceRepository placeRepository;
 
@@ -32,33 +37,10 @@ public class CommentController {
         this.placeRepository = placeRepository;
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{id}/comments")
-    public void createComment(@PathVariable("id") Integer id, @RequestBody Comment toCreate){
-        Place place1 = placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No place found with id="+id));
-        toCreate.setPlace_id(id);
-
-        Set <Comment> comments = new HashSet<>();
-        comments = place1.getComments();
-        comments.add(toCreate);
-        commentRepository.save(toCreate);
-
-        Set<Comment> finalComments = comments;
-
-        placeRepository.findById(id)
-                .ifPresent(place -> {
-                    place.setComments(finalComments);
-                    placeRepository.save(place1);
-                });
-
-        placeRepository.findById(id).ifPresent(place -> {
-            place.setRate(placeRepository.getAveragePlaceRate(id));
-            placeRepository.save(place);
-        });
-
-        logger.info("Comment added");
-        ResponseEntity.created(URI.create("/" + toCreate.getId())).body(toCreate);
+    ResponseEntity<Comment> createComment(@PathVariable("id") Integer id, @RequestBody @Valid Comment toAdd){
+        placeService.createCommentForPlaceById(id, toAdd);
+        return ResponseEntity.created(URI.create("/" + toAdd.getId())).body(toAdd);
     }
 
     //GET powinien wyrzucić wszystkie komentarze danego id place'a z jego seta

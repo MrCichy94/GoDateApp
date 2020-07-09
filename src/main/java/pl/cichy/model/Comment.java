@@ -26,9 +26,9 @@ public class Comment {
     @NotNull(message = "Nie zero RATE!")
     private double userRate;
 
-    Comment(){ }
+    public Comment(){ }
 
-    public Comment(String nickName, String commentText, int userRate) {
+    public Comment(String nickName, String commentText, double userRate) {
         this.nickName = nickName;
         this.commentText = commentText;
         this.userRate = userRate;

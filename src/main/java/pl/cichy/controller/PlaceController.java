@@ -1,7 +1,9 @@
 package pl.cichy.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import pl.cichy.logic.PlaceService;
 import pl.cichy.model.Comment;
 import pl.cichy.model.CommentRepository;
 import pl.cichy.model.Place;
@@ -18,6 +20,9 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/places")
 class PlaceController {
+
+    @Autowired
+    private PlaceService placeService;
 
     private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
     private final PlaceRepository placeRepository;
@@ -73,8 +78,7 @@ class PlaceController {
             return ResponseEntity.notFound().build();
         }
         else {
-            placeRepository.deleteById(id);
-            logger.info("Place deleted");
+            placeService.deletePlace(id);
         }
         return ResponseEntity.noContent().build();
     }
