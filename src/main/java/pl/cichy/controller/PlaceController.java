@@ -36,14 +36,6 @@ class PlaceController {
 
     @PostMapping
     ResponseEntity<Place> createPlace(@RequestBody @Valid Place toCreate){
-
-        toCreate.
-
-        Coordinates newCords = new Coordinates();
-        newCords.setCoordinate_X();
-        newCords.setCoordinate_Y();
-        coordinatesRepository.save(newCords);
-
         Place result = placeRepository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
