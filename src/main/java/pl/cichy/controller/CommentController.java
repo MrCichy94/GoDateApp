@@ -1,25 +1,18 @@
 package pl.cichy.controller;
 
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.cichy.logic.PlaceService;
 import pl.cichy.model.Comment;
 import pl.cichy.model.CommentRepository;
-import pl.cichy.model.Place;
 import pl.cichy.model.PlaceRepository;
-
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/places")

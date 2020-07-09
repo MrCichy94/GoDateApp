@@ -1,12 +1,14 @@
 package pl.cichy.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table( name = "comments")
 public class Comment {
@@ -33,19 +35,4 @@ public class Comment {
         this.commentText = commentText;
         this.userRate = userRate;
     }
-
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
-    public String getNickName() { return nickName; }
-    public void setNickName(String nickName) { this.nickName = nickName; }
-
-    public String getCommentText() { return commentText; }
-    public void setCommentText(String commentText) { this.commentText = commentText; }
-
-    public double getUserRate() { return userRate; }
-    public void setUserRate(double userRate) { this.userRate = userRate; }
-
-    public int getPlace_id() { return place_id; }
-    public void setPlace_id(int place_id) { this.place_id = place_id; }
 }

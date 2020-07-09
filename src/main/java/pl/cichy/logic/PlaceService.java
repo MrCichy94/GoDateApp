@@ -9,7 +9,6 @@ import pl.cichy.model.Place;
 import pl.cichy.model.PlaceRepository;
 import pl.cichy.model.projection.PlaceReadModel;
 import pl.cichy.model.projection.PlaceWriteModel;
-
 import java.util.*;
 import java.util.stream.Collectors;
 

@@ -1,13 +1,16 @@
 package pl.cichy.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 @Entity
 @Table( name = "coordinates")
 public class Coordinates {
@@ -29,12 +32,4 @@ public class Coordinates {
         this.coordinate_X = coordinate_X;
         this.coordinate_Y = coordinate_Y;
     }
-
-    public int getCoordinate_X() { return coordinate_X; }
-    public void setCoordinate_X(int coordinate_X) { this.coordinate_X = coordinate_X; }
-
-    public int getCoordinate_Y() { return coordinate_Y; }
-    public void setCoordinate_Y(int coordinate_Y) { this.coordinate_Y = coordinate_Y; }
-
-
 }

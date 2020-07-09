@@ -1,7 +1,6 @@
 package pl.cichy.model.projection;
 
 import pl.cichy.model.Place;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 
