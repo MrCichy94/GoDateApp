@@ -8,7 +8,7 @@
 * edit place
 * delete place with all comments 
 
-### Current:
+### Current main endpoint response:
 ![Current look](./images/actual1.png)
 
 ### What I would like to do: 
