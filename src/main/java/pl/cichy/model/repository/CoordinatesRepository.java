@@ -1,4 +1,6 @@
-package pl.cichy.model;
+package pl.cichy.model.repository;
+
+import pl.cichy.model.Coordinates;
 
 public interface CoordinatesRepository {
 

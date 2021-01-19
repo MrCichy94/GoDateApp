@@ -1,7 +1,9 @@
-package pl.cichy.model;
+package pl.cichy.model.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import pl.cichy.model.Comment;
+
 import java.util.Optional;
 
 public interface CommentRepository {

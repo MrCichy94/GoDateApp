@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.cichy.model.Place;
-import pl.cichy.model.PlaceRepository;
+import pl.cichy.model.repository.PlaceRepository;
 
 @Repository
 public interface SqlPlaceRepository extends PlaceRepository, JpaRepository<Place, Integer> {

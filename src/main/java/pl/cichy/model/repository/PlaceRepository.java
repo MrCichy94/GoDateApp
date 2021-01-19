@@ -1,7 +1,9 @@
-package pl.cichy.model;
+package pl.cichy.model.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import pl.cichy.model.Place;
+
 import java.util.List;
 import java.util.Optional;
 
