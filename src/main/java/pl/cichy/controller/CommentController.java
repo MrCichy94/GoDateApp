@@ -10,6 +10,7 @@ import pl.cichy.logic.PlaceService;
 import pl.cichy.model.Comment;
 import pl.cichy.model.repository.CommentRepository;
 import pl.cichy.model.repository.PlaceRepository;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;

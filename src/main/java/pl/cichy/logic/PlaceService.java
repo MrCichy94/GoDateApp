@@ -4,12 +4,14 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 import pl.cichy.model.Comment;
-import pl.cichy.model.repository.CommentRepository;
 import pl.cichy.model.Place;
-import pl.cichy.model.repository.PlaceRepository;
 import pl.cichy.model.projection.PlaceReadModel;
 import pl.cichy.model.projection.PlaceWriteModel;
-import java.util.*;
+import pl.cichy.model.repository.CommentRepository;
+import pl.cichy.model.repository.PlaceRepository;
+
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

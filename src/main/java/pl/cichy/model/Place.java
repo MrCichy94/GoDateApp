@@ -27,10 +27,10 @@ public class Place {
     @NotBlank(message = "Nie pusty adres!")
     private String adress;
 
+    private double rate;
+
     @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Coordinates coordinates;
-
-    private double rate;
 
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set <Comment> comments;

@@ -2,19 +2,11 @@ package pl.cichy.interceptors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import pl.cichy.logic.PlaceService;
-import pl.cichy.model.Coordinates;
-import pl.cichy.model.repository.CommentRepository;
-import pl.cichy.model.repository.CoordinatesRepository;
-import pl.cichy.model.repository.PlaceRepository;
 
-import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Component
 public class LoggerInterceptor implements HandlerInterceptor {
@@ -26,7 +18,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
                              final HttpServletResponse response,
                              final Object handler) throws Exception {
 
-        logger.info("[preHandle]" + request.getMethod() + " " + request.getRequestURI());
+        logger.info("[preHandle] " + request.getMethod() + " " + request.getRequestURI());
         return true;
     }
 }
