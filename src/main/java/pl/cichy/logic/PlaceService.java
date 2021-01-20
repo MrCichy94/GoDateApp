@@ -27,43 +27,47 @@ public class PlaceService {
     }
 
     public void createCommentForPlaceById(Integer id, Comment commentToAdd) {
-        Place placeToAddComment = placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No place found with id="+id));
 
-        commentToAdd.setPlace_id(id);
+        if (!placeRepository.existsById(id)) {
+            throw new ResourceNotFoundException("No place found with id=" + id);
+        } else {
+            Place placeToAddComment = placeRepository.findById(id).get();
 
-        Set<Comment> comments;
-        comments = placeToAddComment.getComments();
-        comments.add(commentToAdd);
-        commentRepository.save(commentToAdd);
+            commentToAdd.setPlace_id(id);
 
-        Set<Comment> finalComments = comments;
+            Set<Comment> comments;
+            comments = placeToAddComment.getComments();
+            comments.add(commentToAdd);
+            commentRepository.save(commentToAdd);
 
-        placeRepository.findById(id)
-                .ifPresent(place -> {
-                    place.setComments(finalComments);
-                    placeRepository.save(placeToAddComment);
-                });
+            Set<Comment> finalComments = comments;
 
-        placeRepository.findById(id).ifPresent(place -> {
-            place.setRate(placeRepository.getAveragePlaceRate(id));
-            placeRepository.save(place);
-        });
+            placeRepository.findById(id)
+                    .ifPresent(place -> {
+                        place.setComments(finalComments);
+                        placeRepository.save(placeToAddComment);
+                    });
+
+            placeRepository.findById(id).ifPresent(place -> {
+                place.setRate(placeRepository.getAveragePlaceRate(id));
+                placeRepository.save(place);
+            });
+        }
     }
 
 
-    public void deletePlace(Integer id){
+    public void deletePlace(Integer id) {
 
         placeRepository.deleteById(id);
 
     }
 
-    public PlaceReadModel createPlace(final PlaceWriteModel source){
+    public PlaceReadModel createPlace(final PlaceWriteModel source) {
         Place result = placeRepository.save(source.toPlace());
         return new PlaceReadModel(result);
     }
 
-    public List<PlaceReadModel> readAll(){
+    public List<PlaceReadModel> readAll() {
         return placeRepository.findAll().stream()
                 .map(PlaceReadModel::new)
                 .collect(Collectors.toList());

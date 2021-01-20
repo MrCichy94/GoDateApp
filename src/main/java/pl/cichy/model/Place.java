@@ -24,6 +24,9 @@ public class Place {
     @NotBlank(message = "Nie pusty opis!")
     private String description;
 
+    @NotBlank(message = "Nie puste miasto!")
+    private String city;
+
     @NotBlank(message = "Nie pusty adres!")
     private String adress;
 
@@ -40,6 +43,7 @@ public class Place {
     public void updateFrom(final Place source){
         placeName = source.placeName;
         description = source.description;
+        city = source.city;
         adress = source.adress;
         coordinates = source.coordinates;
     }

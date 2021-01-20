@@ -42,6 +42,7 @@ class PlaceController {
     {
 	    "placeName": "Aronia",
         "description": "Bardzo fajne miejsce na kawę!",
+        "city": "Kraków",
         "adress": "Szewska 2",
         "coordinates": {"coordinate_X": 444, "coordinate_Y": 444}
     }
