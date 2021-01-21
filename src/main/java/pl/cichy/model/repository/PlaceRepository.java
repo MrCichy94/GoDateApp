@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface PlaceRepository {
 
-    List <Place> findAll();
+    List<Place> findAll();
 
-    Page <Place> findAll(Pageable page);
+    Page<Place> findAll(Pageable page);
 
-    Optional <Place> findById(Integer id);
+    Optional<Place> findById(Integer id);
 
     void deleteById(Integer id);
 
@@ -21,5 +21,5 @@ public interface PlaceRepository {
 
     double getAveragePlaceRate(Integer id);
 
-    Place save (Place entity);
+    Place save(Place entity);
 }

@@ -14,7 +14,7 @@ public interface CommentRepository {
 
     void deleteById(Integer id);
 
-    Comment save (Comment entity);
+    Comment save(Comment entity);
 
     boolean existsById(Integer id);
 

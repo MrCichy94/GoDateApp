@@ -4,6 +4,6 @@ import pl.cichy.model.Coordinates;
 
 public interface CoordinatesRepository {
 
-    Coordinates save (Coordinates entity);
+    Coordinates save(Coordinates entity);
 
 }
