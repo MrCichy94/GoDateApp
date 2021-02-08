@@ -46,13 +46,13 @@ public class CommentController {
      */
 
     //GET powinien wyrzucić wszystkie komentarze danego id place'a z jego seta
-    @GetMapping("/{id}/comments")
-    ResponseEntity<List<Comment>> readAllComments(Pageable page, @PathVariable String id) {
+    @GetMapping("/comments")
+    ResponseEntity<List<Comment>> readAllComments(Pageable page) {
         logger.info("Custom pageable");
         return ResponseEntity.ok(commentRepository.findAll(page).getContent());
     }
 
-    @GetMapping("/{id}/comments/{id}")
+    @GetMapping("/comments/{id}")
     ResponseEntity<Comment> readComment(@PathVariable int id){
         return commentRepository.findById(id)
                 .map(ResponseEntity::ok)
