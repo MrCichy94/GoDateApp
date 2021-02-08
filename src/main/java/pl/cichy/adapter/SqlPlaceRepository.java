@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import pl.cichy.model.Place;
 import pl.cichy.model.repository.PlaceRepository;
 
+import java.util.List;
+
 @Repository
 public interface SqlPlaceRepository extends PlaceRepository, JpaRepository<Place, Integer> {
 
@@ -17,4 +19,9 @@ public interface SqlPlaceRepository extends PlaceRepository, JpaRepository<Place
     @Override
     @Query(nativeQuery = true, value ="SELECT AVG(u.USER_RATE) from COMMENTS u where place_id=:id")
     double getAveragePlaceRate(@Param("id") Integer id);
+
+    @Override
+    @Query(nativeQuery = true, value ="SELECT * from PLACES where CITY=:city ORDER BY RATE DESC ")
+    List<Place> getPlaceFromSelectedCity(@Param("city") String city);
+
 }

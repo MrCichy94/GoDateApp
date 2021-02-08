@@ -26,6 +26,10 @@ public class PlaceService {
         this.placeRepository = placeRepository;
     }
 
+    public List<Place> getPlaceByCity(String city) {
+        return placeRepository.getPlaceFromSelectedCity(city);
+    }
+
     public void createCommentForPlaceById(Integer id, Comment commentToAdd) {
 
         if (!placeRepository.existsById(id)) {

@@ -54,6 +54,12 @@ class PlaceController {
         return ResponseEntity.ok(placeRepository.findAll());
     }
 
+    @GetMapping("/pl/{city}")
+    ResponseEntity<List<Place>> readPlaceByCity(@PathVariable String city){
+        logger.info("Custom pageable");
+        return ResponseEntity.ok(placeService.getPlaceByCity(city));
+    }
+
     @GetMapping
     ResponseEntity<List<Place>> readAllPlaces(Pageable page){
         logger.info("Custom pageable");
