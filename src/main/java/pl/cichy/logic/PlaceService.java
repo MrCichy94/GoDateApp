@@ -30,6 +30,10 @@ public class PlaceService {
         return placeRepository.getPlaceFromSelectedCity(city);
     }
 
+    public Set<String> getUniqueCityFromPlace() {
+        return placeRepository.getUniqueCityName();
+    }
+
     public void createCommentForPlaceById(Integer id, Comment commentToAdd) {
 
         if (!placeRepository.existsById(id)) {

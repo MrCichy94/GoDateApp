@@ -7,6 +7,7 @@ import pl.cichy.model.Place;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface PlaceRepository {
 
@@ -23,6 +24,8 @@ public interface PlaceRepository {
     double getAveragePlaceRate(Integer id);
 
     List<Place> getPlaceFromSelectedCity(String city);
+
+    Set<String> getUniqueCityName();
 
     Place save(Place entity);
 }

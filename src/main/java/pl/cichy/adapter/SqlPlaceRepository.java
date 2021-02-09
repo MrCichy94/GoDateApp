@@ -8,6 +8,7 @@ import pl.cichy.model.Place;
 import pl.cichy.model.repository.PlaceRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface SqlPlaceRepository extends PlaceRepository, JpaRepository<Place, Integer> {
@@ -23,5 +24,9 @@ public interface SqlPlaceRepository extends PlaceRepository, JpaRepository<Place
     @Override
     @Query(nativeQuery = true, value ="SELECT * from PLACES where CITY=:city ORDER BY RATE DESC ")
     List<Place> getPlaceFromSelectedCity(@Param("city") String city);
+
+    @Override
+    @Query(nativeQuery = true, value ="SELECT DISTINCT CITY from PLACES")
+    Set<String> getUniqueCityName();
 
 }

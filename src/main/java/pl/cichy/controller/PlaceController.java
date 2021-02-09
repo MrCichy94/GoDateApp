@@ -14,6 +14,7 @@ import pl.cichy.model.repository.PlaceRepository;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/places")
@@ -54,9 +55,15 @@ class PlaceController {
         return ResponseEntity.ok(placeRepository.findAll());
     }
 
+    @GetMapping("/unique")
+    ResponseEntity<Set<String>> readUniqueCityName(){
+        logger.info("Read all city.");
+        return ResponseEntity.ok(placeService.getUniqueCityFromPlace());
+    }
+
     @GetMapping("/pl/{city}")
     ResponseEntity<List<Place>> readPlaceByCity(@PathVariable String city){
-        logger.info("Custom pageable");
+        logger.info("Sorted by selected city.");
         return ResponseEntity.ok(placeService.getPlaceByCity(city));
     }
 
